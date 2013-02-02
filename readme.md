@@ -5,7 +5,11 @@ Welcome. Alku is a free WordPress theme developed by [Danny Ramirez](http://dron
 
 This repository contains all main WordPress theme, the project files and sample child theme are hosted in separate repositories. The following is an overview of the current project directory.
 
+<<<<<<< HEAD
 * [alku](https://github.com/dronix/alku) - This is the main repository of the Alku WordPress theme. Any suggestions or bugs can be issued here.
+=======
+* [alku](https://github.com/dronix/alku) - This is the main repository of the Alku WordPress theme repository. Any suggestions or bugs can be issued here.
+>>>>>>> b4389625dad000e68bc19fe92caf36ebeda4fa90
 * [alku-bee](https://github.com/dronix/alku-bee) - This is a sample WordPress child theme that will be part of a bonus section in the e-Book and video tutorials.
 * [alku-project-files](https://github.com/dronix/alku-project-files) - This repository hosts additional resources such as the PSD design and the static HTML template.
 
