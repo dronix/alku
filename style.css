@@ -473,8 +473,8 @@ button.download:hover,
   text-align: center;
 }
 .layout-1c .entry-header i {
-  float: none;
   top: 0;
+  float: none;
 }
 .layout-1c .wp-post-image {
   display: block;
@@ -1307,7 +1307,7 @@ img.alignright {
     border-right: 1px solid #e8e8e8;
     border-left: 1px solid #e8e8e8;
     background-color: #fff;
-    text-align: justify;
+    text-align: left;
     -webkit-transition: background 200ms linear;
     -moz-transition: background 200ms linear;
     -ms-transition: background 200ms linear;
