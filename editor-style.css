@@ -1,0 +1,332 @@
+html {
+  font-size: 62.5%;
+}
+body {
+  background: #fff;
+  color: #555;
+  font-weight: 400;
+  font-size: 15px;
+  font-size: 1.5rem;
+  font-family: "Open Sans", "Helvetica Nue", Helvetica, Arial, sans-serif;
+  line-height: 24px;
+  line-height: 2.4rem;
+}
+::selection {
+background: #feffda;
+color: #555;
+}
+::-moz-selection {
+  background: #feffda;
+  color: #555;
+}
+p {
+  margin-bottom: 20px;
+  margin-bottom: 2rem;
+}
+a {
+  color: #39f;
+}
+a:hover {
+  color: #2b2e31;
+  -webkit-transition: color 200ms linear, background 200ms linear;
+  -moz-transition: color 200ms linear, background 200ms linear;
+  -ms-transition: color 200ms linear, background 200ms linear;
+  -o-transition: color 200ms linear, background 200ms linear;
+  transition: color 200ms linear, background 200ms linear;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+iframe {
+  max-width: 100%;
+}
+.post-edit-link {
+  color: #aaa;
+}
+.post-edit-link:hover {
+  color: #39f;
+}
+input,
+textarea {
+  padding: 10px;
+  padding: 1rem;
+  border: 1px solid #f8f8f8;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  color: #999;
+}
+input:hover,
+input:focus,
+textarea:hover,
+textarea:focus {
+  outline: 0;
+  border: 1px solid #e8e8e8;
+}
+input[type="submit"] {
+  padding: 10px 22px;
+  padding: 1rem 2.2rem;
+  border: none;
+  background-color: #2b2e31;
+  color: #fff;
+  font-size: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+input[type="submit"]:hover {
+  background-color: #39f;
+  -webkit-transition: color 200ms linear, background 200ms linear;
+  -moz-transition: color 200ms linear, background 200ms linear;
+  -ms-transition: color 200ms linear, background 200ms linear;
+  -o-transition: color 200ms linear, background 200ms linear;
+  transition: color 200ms linear, background 200ms linear;
+}
+
+/* ==================================== */
+/*    Typography [DR03]                 */
+/* ==================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  color: #2b2e31;
+  line-height: 30px;
+  line-height: 3rem;
+}
+h1 {
+  font-size: 28px;
+  font-size: 2.8rem;
+}
+h2 {
+  font-size: 20px;
+  font-size: 2rem;
+}
+h3 {
+  font-size: 15px;
+  font-size: 1.5rem;
+}
+h4 {
+  font-size: 13px;
+  font-size: 1.3rem;
+}
+h5 {
+  font-size: 11px;
+  font-size: 1.1rem;
+}
+h6 {
+  font-weight: normal;
+  font-size: 11px;
+  font-size: 1.1rem;
+}
+strong,
+th,
+dt {
+  color: #2b2e31;
+}
+ins {
+  background-color: #feffda;
+  text-decoration: none;
+}
+code,
+pre {
+  padding: 0 5px;
+  border: 1px solid #E8E8E8;
+  border-radius: 5px;
+  background-color: #F8F8F8;
+}
+pre {
+  padding: 20px;
+  padding: 2rem;
+  font-size: 12px;
+  font-size: 1.2rem;
+  font-family: "Monaco", monospace;
+}
+address {
+  margin-bottom: 20px;
+  margin-bottom: 2rem;
+}
+table {
+  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+th {
+  border-bottom: 2px solid #e8e8e8;
+}
+th,
+td {
+  padding: 5px 20px;
+  padding: 0.5rem 2rem;
+  text-align: left;
+}
+td {
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+table .alternate {
+  background-color: #f8f8f8;
+}
+.entry-content ul,
+.entry-content ol,
+.comment-content ul,
+.comment-content ol {
+  margin: 0 20px 20px;
+  margin: 0 2rem 2rem;
+  padding-left: 10px;
+  padding-left: 1rem;
+}
+.entry-content blockquote,
+.comment-content blockquote {
+  padding: 20px;
+  font-style: italic;
+}
+.entry-content dl,
+.entry-comment dl {
+  margin: 0 20px;
+  margin: 0 2rem;
+}
+.entry-content dt,
+.comment-content dt {
+  font-weight: 700;
+}
+.entry-content dd,
+.comment-content dd {
+  margin-bottom: 20px;
+  margin-bottom: 2rem;
+}
+
+/* ==================================== */
+/*    $Helpers  [DR04]                  */
+/* ==================================== */
+
+.hidden-text {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+/* ======== $Floats [DR04.1]  ========= */
+.aligncenter {
+  display: block;
+  margin: auto;
+}
+.fl,
+.alignleft {
+  float: left;
+}
+.fr,
+.alignright {
+  float: right;
+}
+.clearfix {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+/* ======= $Buttons  [DR04.2]  ======= */
+
+button {
+  padding: 10px 22px;
+  padding: 1rem 2.2rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #2b2e31;
+  color: #fff;
+  font-size: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+button:hover {
+  
+}
+button:hover {
+  background-color: #39f;
+  -webkit-transition: color 200ms linear, background 200ms linear;
+  -moz-transition: color 200ms linear, background 200ms linear;
+  -ms-transition: color 200ms linear, background 200ms linear;
+  -o-transition: color 200ms linear, background 200ms linear;
+  transition: color 200ms linear, background 200ms linear;
+}
+button.red,
+[type="submit"].red {
+  background-color: #f33737;
+}
+button.red:hover,
+[type="submit"].red:hover {
+  background-color: #b40b0b;
+}
+button.green,
+[type="submit"].green {
+  background-color: #9bd845;
+}
+button.green:hover,
+[type="submit"].green:hover {
+  background-color: #78ac07;
+}
+button.blue,
+[type="submit"].blue {
+  background-color: #39f;
+}
+button.blue:hover,
+[type="submit"].blue:hover {
+  background-color: #0762bd;
+}
+button.orange,
+[type="submit"].orange {
+  background-color: #f37937;
+}
+button.orange:hover,
+[type="submit"].orange:hover {
+  background-color: #c43d08;
+}
+button.yellow,
+[type="submit"].yellow {
+  background-color: #f3bf37;
+}
+button.yellow:hover,
+[type="submit"].yellow:hover {
+  background-color: #d98610;
+}
+button.download,
+[type="submit"].download {
+  background-color: #6333ff;
+}
+button.download:before {
+  padding-right: 7px;
+  padding-right: 0.7rem;
+  content: "\e0c3";
+  font-family: "Elusive-Icons";
+  line-height: 7px;
+}
+button.download:hover,
+[type="submit"].download:hover {
+  background-color: #4613ea;
+}
+
+/* ==== $Image Alignments [DR08.1]  === */
+img.aligncenter {
+  margin-top: 10px;
+  margin-top: 1rem;
+  margin-bottom: 10px;
+  margin-bottom: 1rem;
+}
+img.alignleft {
+  margin: 0 20px 10px 0;
+  margin: 0 2rem 1rem 0;
+}
+img.alignright {
+  margin: 0 0 10px 20px;
+  margin: 0 0 1rem 2rem;
+}
