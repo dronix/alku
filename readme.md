@@ -14,7 +14,7 @@ Live Demo
 
 You can test drive the Alku theme at the following address:
 
-[http://demo.dronix.me/alku](http://demo.dronix.me)
+[http://demo.dronix.me/alku](http://demo.dronix.me/alku)
 
 
 License
