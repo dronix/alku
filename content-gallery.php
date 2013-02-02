@@ -25,18 +25,10 @@ do_atomic( 'entry_before' ); // alku_entry_before ?>
             <?php endif; // is_singular() ?>
           </header><!-- .entry-header -->
 
-          <?php if ( is_home() && alku_has_gallery() ) : ?>
-            <div class="gallery-slider-container">
-              <?php echo apply_atomic_shortcode( 'gallery_slider', '[gallery-slider]' ); ?>
-            </div>
-            <?php the_excerpt(); ?>
-
-          <?php else:  ?>
             <div class="entry-content">              
                 <?php the_content(); ?>
                 <?php wp_link_pages( array( 'before' => '<p class="page-links">' . '<span class="before">' . __( 'Pages:', 'alku' ) . '</span>', 'after' => '</p>' ) ); ?>
             </div><!-- .entry-content -->
-          <?php endif; ?>
 
           <?php get_template_part( 'content-footer' ); // Load the content-footer.php template ?>
 

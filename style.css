@@ -3,7 +3,7 @@
  * Theme Name: Alku
  * Theme URI: http://demo.dronix.me/alku
  * Description: A simple theme built with Hybrid Core. It supports all of the post-formats, includes icon fonts and a gallery slider. The layout is responsive and supports up to two columns.
- * Version: 0.1.0
+ * Version: 0.1.1
  * Author: Danny Ramirez
  * Author URI: http://dronix.me
  * Tags: white, one-column, two-columns, fixed-width, threaded-comments, sticky-post, translation-ready, rtl-language-support, editor-style, post-formats
@@ -848,6 +848,9 @@ img.alignright {
 .flexslider .slides li {
   display: none;
   -webkit-backface-visibility: hidden;
+}
+.flexslider .gallery-caption {
+  text-align: center;
 }
 .gallery {
   margin-bottom: 20px;

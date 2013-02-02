@@ -158,7 +158,7 @@ function alku_register_shortcodes() {
   add_shortcode( 'comment-published', 'alku_comment_published_shortcode' );
   add_shortcode( 'hc-link', 'alku_hc_link_shortcode' );
   add_shortcode( 'author-info', 'alku_author_info_shortcode' );
-  add_shortcode( 'gallery-slider', 'alku_gallery_slider', 11, 2 );
+  add_shortcode( 'gallery-slider', 'alku_gallery_slider_shortcode' );
 
 }
 
@@ -233,22 +233,33 @@ function alku_author_info_shortcode( $attr ) {
 }
 
 /**
- * Shortcode based on the modified version of `[gallery]`,
- * `cleaner-gallery`. This shortcode should only be used
- * inside the loop.
- *
- * @since 0.1.0
+ * Shortcode based on the modified version of 'cleaner-gallery'.
+ * This shortcode acts just like the default [gallery], the only difference is
+ * the returned HTML.
+ * @since 0.1.1
  */
-function alku_gallery_slider( $output, $attr ) {
+function alku_gallery_slider_shortcode( $attr ) {
+  global $post;
 
-  static $cleaner_gallery_instance = 0;
-  $cleaner_gallery_instance++;
+  static $alku_gallery_slider_instance = 0;
+  $alku_gallery_slider_instance++;
 
   /* We're not worried abut galleries in feeds, so just return the output here. */
   if ( is_feed() )
     return $output;
 
-  /* Orderby. */
+  
+  if (!empty($attr['ids'])) {
+    if (empty($attr['orderby'])) {
+      $attr['orderby'] = 'post__in';
+    }
+    $attr['include'] = $attr['ids'];
+  }
+
+  /* Apply filters to the default arguments. */
+  $output = apply_filters('alku_post_gallery_slider', '', $attr);
+
+/* Orderby. */
   if ( isset( $attr['orderby'] ) ) {
     $attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
     if ( !$attr['orderby'] )
@@ -257,19 +268,22 @@ function alku_gallery_slider( $output, $attr ) {
 
   /* Default gallery settings. */
   $defaults = array(
-    'order' => 'ASC',
-    'orderby' => 'menu_order ID',
-    'id' => get_the_ID(),
-    'link' => '',
-    'itemtag' => 'li',
-    'icontag' => 'dt',
-    'captiontag' => 'dd',
-    'columns' => 3,
-    'size' => 'full',
-    'include' => '',
-    'exclude' => '',
-    'numberposts' => -1,
-    'offset' => ''
+    'order'           => 'ASC',
+    'orderby'         => 'menu_order ID',
+    'id'              => $post->ID,
+    'container_class' => 'flexslider',
+    'list_class'      => 'slides',
+    'list_tag'        => 'ul',
+    'itemtag'         => 'li',
+    'icontag'         => '',
+    'captiontag'      => '',
+    'columns'         => 3,
+    'size'            => 'full',
+    'ids'             => '',
+    'include'         => '',
+    'exclude'         => '',
+    'numberposts'     => -1,
+    'offset'          => ''
   );
 
   /* Apply filters to the default arguments. */
@@ -285,72 +299,79 @@ function alku_gallery_slider( $output, $attr ) {
 
   /* Arguments for get_children(). */
   $children = array(
-    'post_parent' => $id,
-    'post_status' => 'inherit',
-    'post_type' => 'attachment',
-    'post_mime_type' => 'image',
-    'order' => $order,
-    'orderby' => $orderby,
-    'exclude' => $exclude,
-    'include' => $include,
-    'numberposts' => $numberposts,
-    'offset' => $offset,
+    'post_status'      => 'inherit',
+    'post_type'        => 'attachment',
+    'post_mime_type'   => 'image',
+    'order'            => $order,
+    'orderby'          => $orderby,
+    'exclude'          => $exclude,
+    'include'          => $include,
+    'numberposts'      => $numberposts,
+    'offset'           => $offset,
     'suppress_filters' => true
   );
 
   /* Get image attachments. If none, return. */
-  $attachments = get_children( $children );
+  if (!empty($include)) {
+    $_attachments = get_posts(array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby));
 
-  if ( empty( $attachments ) )
-    return '';
-
-  /* Properly escape the gallery tags. */
-  $itemtag = tag_escape( $itemtag );
-  $icontag = tag_escape( $icontag );
-  $captiontag = tag_escape( $captiontag );
-  $i = 0;
-
-  /* Count the number of attachments returned. */
-  $attachment_count = count( $attachments );
-
-  /* Open the gallery <div>. */
-  $output = "\n\t\t\t<div class='flexslider'><ul id='gallery-slider-{$id}-{$cleaner_gallery_instance}' class='slides ggallery ggallery-{$id}'>";
-
-  /* Loop through each attachment. */
-  foreach ( $attachments as $id => $attachment ) {
-
-    /* Open each gallery item. */
-    $output .= "\n\t\t\t\t\t<{$itemtag} class='gallery-slider-item'>";
-
-    /* Add the image. */
-    $image = "<a href='". get_permalink() . "'>" . wp_get_attachment_image( $id, $size ) . "</a>";
-    $output .= apply_filters( 'alku_gallery_slider_image', $image, $id, $attr, $cleaner_gallery_instance );
-
-
-    /* Close individual gallery item. */
-    $output .= "\n\t\t\t\t\t</{$itemtag}>";
-
+    $attachments = array();
+    foreach ($_attachments as $key => $val) {
+      $attachments[$val->ID] = $_attachments[$key];
+    }
+  } elseif (!empty($exclude)) {
+    $attachments = get_children(array('post_parent' => $id, 'exclude' => $exclude, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby));
+  } else {
+    $attachments = get_children(array('post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby));
   }
 
-  /* Close the gallery <div>. */
-  $output .= "\n\t\t\t</ul></div><!-- .gallery -->\n";
+  if (empty($attachments)) {
+    return '';
+  }
 
-  /* Return out very nice, valid HTML gallery. */
+  if (is_feed()) {
+    $output = "\n";
+    foreach ($attachments as $att_id => $attachment) {
+      $output .= wp_get_attachment_link($att_id, $size, true) . "\n";
+    }
+    return $output;
+  }
+
+  /* Properly escape the gallery tags. */
+  $container_class = tag_escape( $container_class );
+  $list_class      = tag_escape( $list_class );
+  $list_tag        = tag_escape( $list_tag ); 
+  $itemtag         = tag_escape( $itemtag );
+  $icontag         = tag_escape( $icontag );
+  $captiontag      = tag_escape( $captiontag );
+  $i = 0;
+
+  /* Add opening wrapping and gallery <div>. */
+  $output = "<div id='gallery-{$id}-{$alku_gallery_slider_instance}' class='{$container_class}'><{$list_tag} class='{$list_class}'>";
+
+  /* Loop through each attachment. */
+  foreach ($attachments as $id => $attachment) {
+
+    /* Add the image. */
+    $image = ( ( isset( $attr['link'] ) && 'file' == $attr['link'] ) ? wp_get_attachment_link( $attachment->ID, $size, false, false ) : wp_get_attachment_link( $attachment->ID, $size, true, false ) );
+    $output .= "<$itemtag>" . $image;
+
+    /* Get the caption. */
+    $caption = apply_filters( 'alku_gallery_slider_caption', wptexturize( $attachment->post_excerpt ), $attachment->ID, $attr, $alku_gallery_slider_instance );
+
+    /* If image caption is set. */
+    if ( !empty( $caption ) )
+      $output .= '<div class="gallery-caption">' . wptexturize($attachment->post_excerpt) . '</div>';
+
+    /* Close the image wrapper. */
+    $output .= "</$itemtag>";
+  }
+
+  /* Close wrapping div and gallery <div>. */
+  $output .= "</{$list_tag}</div>";
+
+  /* Return the HTML for the Flexslider. */
   return $output;
-}
-
-/**
- * Checks if a post has a gallery
- * 
- * @since 0.1.0
- */
-function alku_has_gallery() { 
-  global $post;
-
-  $has_gallery = strpos($post->post_content,'[gallery') !== false;
-
-  return $has_gallery;
-
 }
 
 /**
@@ -443,5 +464,4 @@ function alku_extend_the_content( $content ) {
 
   return $content;
 }
-
 ?>
