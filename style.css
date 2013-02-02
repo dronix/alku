@@ -815,7 +815,8 @@ img.alignright {
   display: block;
   margin-bottom: 10px;
 }
-.format-aside .entry-content {
+.format-aside .entry-content,
+.format-link .entry-content {
   text-align: center;
 }
 .aside-permalink {
@@ -848,6 +849,10 @@ img.alignright {
 .gallery {
   margin-bottom: 20px;
   margin-bottom: 2rem;
+}
+.format-link .entry-content a {
+  font-size: 20px;
+  font-size: 2rem;
 }
 .format-status .published {
   float: right;

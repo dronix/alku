@@ -429,7 +429,7 @@ function alku_embed_defaults( $args ) {
 
 /**
  * Adds a permalink at the end of the content to an
- * aside post-format.
+ * aside post-format and an icon to the link post-format.
  *
  * @since  0.1.0
  */
@@ -437,6 +437,9 @@ function alku_extend_the_content( $content ) {
 
   if ( has_post_format( 'aside' ) && !is_singular() )
     $content .= '<a href="' . get_permalink() . '" class="aside-permalink">&#8734;</a>';
+
+  if ( has_post_format( 'link' ) && !is_singular() )
+    $content .= '<i class="icon-share"></i>';
 
   return $content;
 }
