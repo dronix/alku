@@ -747,6 +747,9 @@ button.download:hover,
 .error-term {
   background-color: #feffda;
 }
+.page-links {
+  clear: both;
+}
 
 /* ==== $Image Alignments [DR08.1]  === */
 img.aligncenter {
