@@ -588,7 +588,8 @@ button.download:hover,
   background-color: #39f;
 }
 .mobile-menu-toggle,
-.mobile-menu-container {
+.mobile-menu-container,
+.mobile-menu-container #menu-main {
   display: none;
 }
 
@@ -1279,6 +1280,9 @@ img.alignright {
 }
 
 @media screen and (min-width: 480px) {
+  .mobile-menu-container #menu-main {
+    display: none;
+  }
 
 /* ====== $Drop-down Menu  [DR13.1] ====== */
 
@@ -1405,6 +1409,9 @@ img.alignright {
     display: none;
     float: none;
     clear: both;
+  }
+  .mobile-menu-container #menu-main {
+    display: block;
   }
   .mobile-menu-toggle {
     display: block;
