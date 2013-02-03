@@ -271,7 +271,8 @@ function alku_gallery_slider_shortcode( $attr ) {
     'order'           => 'ASC',
     'orderby'         => 'menu_order ID',
     'id'              => $post->ID,
-    'container_class' => 'flexslider',
+    'container_class' => 'gallery-slider-container',
+    'list_wrap_class' => 'flexslider',
     'list_class'      => 'slides',
     'list_tag'        => 'ul',
     'itemtag'         => 'li',
@@ -339,6 +340,7 @@ function alku_gallery_slider_shortcode( $attr ) {
 
   /* Properly escape the gallery tags. */
   $container_class = tag_escape( $container_class );
+  $container_class = tag_escape( $list_wrap_class );
   $list_class      = tag_escape( $list_class );
   $list_tag        = tag_escape( $list_tag ); 
   $itemtag         = tag_escape( $itemtag );
@@ -347,7 +349,7 @@ function alku_gallery_slider_shortcode( $attr ) {
   $i = 0;
 
   /* Add opening wrapping and gallery <div>. */
-  $output = "<div id='gallery-{$id}-{$alku_gallery_slider_instance}' class='{$container_class}'><{$list_tag} class='{$list_class}'>";
+  $output = "<div class='{$list_wrap_class}' <div id='gallery-{$id}-{$alku_gallery_slider_instance}' class='{$list_wrap_class}'><{$list_tag} class='{$list_class}'>";
 
   /* Loop through each attachment. */
   foreach ($attachments as $id => $attachment) {
@@ -368,7 +370,7 @@ function alku_gallery_slider_shortcode( $attr ) {
   }
 
   /* Close wrapping div and gallery <div>. */
-  $output .= "</{$list_tag}</div>";
+  $output .= "</{$list_tag}</div></div>";
 
   /* Return the HTML for the Flexslider. */
   return $output;
