@@ -844,7 +844,10 @@ img.alignright {
   margin-bottom: 2rem;
 }
 .format-gallery p {
-  clear: both;
+  clear: both; 
+}
+.flexslider {
+  margin-bottom: 20px;
 }
 .flexslider .slides li {
   display: none;

@@ -339,8 +339,7 @@ function alku_gallery_slider_shortcode( $attr ) {
   }
 
   /* Properly escape the gallery tags. */
-  $container_class = tag_escape( $container_class );
-  $container_class = tag_escape( $list_wrap_class );
+  $list_wrap_class = tag_escape( $list_wrap_class );
   $list_class      = tag_escape( $list_class );
   $list_tag        = tag_escape( $list_tag ); 
   $itemtag         = tag_escape( $itemtag );
@@ -349,7 +348,7 @@ function alku_gallery_slider_shortcode( $attr ) {
   $i = 0;
 
   /* Add opening wrapping and gallery <div>. */
-  $output = "<div class='{$list_wrap_class}' <div id='gallery-{$id}-{$alku_gallery_slider_instance}' class='{$list_wrap_class}'><{$list_tag} class='{$list_class}'>";
+  $output = "<div class='{$container_class}'><div id='gallery-{$id}-{$alku_gallery_slider_instance}' class='{$list_wrap_class}'><{$list_tag} class='{$list_class}'>";
 
   /* Loop through each attachment. */
   foreach ($attachments as $id => $attachment) {
